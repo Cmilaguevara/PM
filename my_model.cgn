@@ -1,5 +1,11 @@
 # Macro Model Equations
 
+var A, C, I, K, L, Y, r, var_lambda, w;
+varexo epsilon_A;
+
+parameters alpha, beta, delta, rho_A;
+parameters sigma_C, sigma_L;
+
  STEADY_STATE
 {
     identities
@@ -35,16 +41,17 @@ IIPbar =  ;
 
 
 #Productivity Schock (A)
-log(A[]) = rho_A * log( A[-1] )+ epsilon_A[];
-		
-
+ identities
+    {
+        log(A[]) = rho_A * log(A[-1]) + epsilon_A[];
+    };
+	
+	calibration
+	{
+		rho_A = 0.85;
+		sigma_epsilon_A = 0.04;
 	};
 	
-
-	shocks
-	{
-		;
-	};
 
  EQULIBRIUM
 {
