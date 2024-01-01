@@ -25,11 +25,25 @@
 
 
 # Calibration Parameters
-beta = 0.99
-alpha = 0.30
-delta = 0.025
-Rho = 0.85
+beta = 0.99;
+alpha = 0.30;
+delta = 0.025;
+Rho_A = 0.85;
+Sigma_L = ;
+Sigma_C =  ;
 
+
+#Productivity Schock (A)
+log(A[]) = rho_A * log( A[-1] )+ epsilon_A[];
+		
+
+	};
+	
+
+	shocks
+	{
+		;
+	};
 
  EQULIBRIUM
 {
