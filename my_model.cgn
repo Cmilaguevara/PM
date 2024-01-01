@@ -6,7 +6,13 @@ varexo epsilon_A;
 parameters alpha, beta, delta, rho_A;
 parameters sigma_C, sigma_L;
 
- STEADY_STATE
+ tryreduce
+{
+	U[];
+	u[];
+};
+
+block STEADY_STATE
 {
     identities
     {
@@ -28,6 +34,7 @@ parameters sigma_C, sigma_L;
 		CA[ss] = TB[ss] + r[ss]*IIP[ss];		
 		lambda[ss] = (C[ss] - N[ss] ^ omega / omega) ^ (-gamma);
     };
+};
 
 calibration
 	{
@@ -45,7 +52,8 @@ calibration
 
 
 #Productivity Schock (A)
- identities
+ {
+    identities
     {
         log(A[]) = rho_A * log(A[-1]) + epsilon_A[];
     };
@@ -55,9 +63,14 @@ calibration
 		rho_A = 0.85;
 		sigma_epsilon_A = 0.04;
 	};
-	
 
- EQULIBRIUM
+    shocks
+    {
+        epsilon_A[];
+    };
+};
+
+block EQULIBRIUM
 {
 	identities
 	{
@@ -65,4 +78,3 @@ calibration
 		Y[] = A[] * K[-1] ^ alpha * N[] ^ (1 - alpha);
 	};
 };
-
