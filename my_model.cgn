@@ -1,0 +1,7 @@
+# Macro Model Equations
+Y = const + beta1 * C + beta2 * I
+
+# Calibration Parameters
+const = 0.00019403816197846
+beta1 = 0.6125247598542378
+beta2 = 0.5336323174543617
