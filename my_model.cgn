@@ -29,15 +29,19 @@ parameters sigma_C, sigma_L;
 		lambda[ss] = (C[ss] - N[ss] ^ omega / omega) ^ (-gamma);
     };
 
-
-# Calibration Parameters
-beta = 0.99;
-alpha = 0.30;
-delta = 0.025;
-Rho_A = 0.85;
-Sigma_L = ;
-Sigma_C =  ;
-IIPbar =  ; 
+calibration
+	{
+		beta = 0.990099;
+		delta = 0.025;
+        gamma = 2;
+        omega = 1.455;
+        alpha = 0.30;
+        rstar = 0.01;
+		IIPbar = 0;
+                Sigma_L =;
+                Sigma_C=;
+	};
+};
 
 
 #Productivity Schock (A)
