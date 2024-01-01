@@ -1,7 +1,42 @@
 # Macro Model Equations
-Y = const + beta1 * C + beta2 * I
+
+ STEADY_STATE
+{
+    identities
+    {
+        A[ss] = 1;
+		IIP[ss] = IIPbar;
+        r[ss] = rstar;
+		r_given[ss] = r[ss];
+        KtoN[ss] = (alpha/(r[ss]+delta))^(1/(1-alpha));
+        N[ss] = ((1-alpha)*(KtoN[ss])^alpha)^(1/(omega-1));
+        K[ss] = KtoN[ss]*N[ss];
+        Y[ss] = A[ss] * K[ss] ^ alpha * N[ss] ^ (1 - alpha);
+        I[ss] = delta * K[ss];
+		C[ss] = r[ss]*IIP[ss]+Y[ss]-I[ss];
+        u[ss] = 1/(1-gamma)*((C[ss]-1/omega*N[ss]^omega)^(1-gamma)-1);
+        U[ss] = 1 / (1 - beta) * u[ss];
+        Cadjcost[ss] = 0;
+        TB[ss] = Y[ss] - C[ss] - I[ss] - Cadjcost[ss];
+        TBtoY[ss] = TB[ss] / Y[ss];
+		CA[ss] = TB[ss] + r[ss]*IIP[ss];		
+		lambda[ss] = (C[ss] - N[ss] ^ omega / omega) ^ (-gamma);
+    };
+
 
 # Calibration Parameters
-const = 0.00019403816197846
-beta1 = 0.6125247598542378
-beta2 = 0.5336323174543617
+beta = 0.99
+alpha = 0.30
+delta = 0.025
+Rho = 0.85
+
+
+ EQULIBRIUM
+{
+	identities
+	{
+		I[] = K[] - (1 - delta) * K[-1];
+		Y[] = A[] * K[-1] ^ alpha * N[] ^ (1 - alpha);
+	};
+};
+
