@@ -31,6 +31,7 @@ delta = 0.025;
 Rho_A = 0.85;
 Sigma_L = ;
 Sigma_C =  ;
+IIPbar =  ; 
 
 
 #Productivity Schock (A)
