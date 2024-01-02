@@ -69,8 +69,8 @@ block HOUSEHOLD
 	{
 		beta = 0.99;
 		delta = 0.025;
-        gamma = 2;
-        omega = 2.5;
+        gamma = 1.5;
+        omega = 3;
         psi2 = 0.0004;
         psi = 0.02;
         alpha = 0.30;
