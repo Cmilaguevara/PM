@@ -1,18 +1,11 @@
-# Macro Model Equations
-
-var A, C, I, K, L, Y, r, var_lambda, w;
-varexo epsilon_A;
-
-parameters alpha, beta, delta, rho_A;
-parameters sigma_C, sigma_L;
-
- tryreduce
+tryreduce
 {
 	U[];
 	u[];
 };
 
-bloque STEADY_STATE
+
+block STEADY_STATE
 {
     identities
     {
@@ -36,14 +29,15 @@ bloque STEADY_STATE
     };
 };
 
-bloque HOUSEHOLD
+
+block HOUSEHOLD
 {
 	definitions
 	{
-		u[] = ;
-		I[] = ;
-		Cadjcost[] = ;
-		Y[] = ;
+		u[] = 1/(1-gamma)*((C[] - 1 / omega * N[] ^ omega) ^ (1 - gamma) - 1);
+		I[] = K[] - (1 - delta) * K[-1];
+		Cadjcost[] = psi/2*(K[] - K[-1])^2;
+		Y[] = A[] * K[-1] ^ alpha * N[] ^ (1 - alpha);
 	};
 
 	controls
@@ -51,24 +45,23 @@ bloque HOUSEHOLD
 		C[], N[], K[], IIP[];
 	};
 
-		objective
+	objective
 	{
 		U[] = u[] + beta * E[][U[1]];
 	};
 
 	constraints
 	{
-		                            ];
+		C[] + I[] + Cadjcost[] + IIP[] = Y[] + (1+r_given[-1])*IIP[-1] : lambda[];
 	};
-
 	
 	identities
 	{
-		TB[] = Y[] - C[] - I[] - Costadjcons[];
-		KtoN[] = ;
+		TB[] = Y[] - C[] - I[] - Cadjcost[];
+		KtoN[] = K[] / N[];
 		TBtoY[] = TB[] / Y[];
-		CA[] = ;
-		r[] = ;
+		CA[] = TB[] + r[-1]*IIP[-1];
+		r[] = rstar + psi2*(exp(IIPbar-IIP[])-1);
 		r_given[] = r[];
 	};
 	
@@ -77,20 +70,18 @@ bloque HOUSEHOLD
 		beta = 0.99;
 		delta = 0.025;
         gamma = 2;
-        omega = 1.455;
-        psi2 = ;
-        psi = ;
-        alpha = 030;
-        rstar = 0.01;
+        omega = 2.5;
+        psi2 = 0.000742;
+        psi = 0.02;
+        alpha = 0.30;
+        rstar = 0.015;
 		IIPbar = 0;
-                sigma_C ~ N(mu=  , sd= , lower= ) = ;
-                sigma_L ~ N(loc= , scale= , lower= ) = ;
 	};
 };
 
 
-#Productivity Schock (A)
- {
+block TECHNOLOGY_SHOCKS
+{
     identities
     {
         log(A[]) = rho_A * log(A[-1]) + epsilon_A[];
@@ -99,7 +90,7 @@ bloque HOUSEHOLD
 	calibration
 	{
 		rho_A = 0.85;
-		sigma_epsilon_A = 0.04;
+		sigma_epsilon_A = 0.01;
 	};
 
     shocks
@@ -114,6 +105,5 @@ block EQULIBRIUM
 	{
 		I[] = K[] - (1 - delta) * K[-1];
 		Y[] = A[] * K[-1] ^ alpha * N[] ^ (1 - alpha);
-
-
-
+	};
+};
