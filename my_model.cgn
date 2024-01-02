@@ -51,15 +51,16 @@ bloque HOUSEHOLD
 		C[], N[], K[], IIP[];
 	};
 
-	objective
+		objective
 	{
-		U[] =;
+		U[] = u[] + beta * E[][U[1]];
 	};
 
 	constraints
 	{
-		;
+		                            ];
 	};
+
 	
 	identities
 	{
@@ -82,8 +83,8 @@ bloque HOUSEHOLD
         alpha = 030;
         rstar = 0.01;
 		IIPbar = 0;
-                sigma_C ~ N(mu=1.5, sd=0.1, lower=1.0) = 1.5;
-                sigma_L ~ N(loc=2.0, scale=0.1, lower=1.0) = 2.0;
+                sigma_C ~ N(mu=  , sd= , lower= ) = ;
+                sigma_L ~ N(loc= , scale= , lower= ) = ;
 	};
 };
 
