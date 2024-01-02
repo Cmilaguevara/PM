@@ -74,7 +74,7 @@ block HOUSEHOLD
         psi2 = 0.0004;
         psi = 0.02;
         alpha = 0.30;
-        rstar = 0.015;
+        rstar = 0.010101;
 		IIPbar = 0;
 	};
 };
