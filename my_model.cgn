@@ -71,7 +71,7 @@ block HOUSEHOLD
 		delta = 0.025;
         gamma = 2;
         omega = 2.5;
-        psi2 = 0.000742;
+        psi2 = 0.0004;
         psi = 0.02;
         alpha = 0.30;
         rstar = 0.015;
