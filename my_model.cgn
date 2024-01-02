@@ -12,7 +12,7 @@ parameters sigma_C, sigma_L;
 	u[];
 };
 
-block STEADY_STATE
+bloque STEADY_STATE
 {
     identities
     {
@@ -36,17 +36,54 @@ block STEADY_STATE
     };
 };
 
-calibration
+bloque HOUSEHOLD
+{
+	definitions
 	{
-		beta = 0.990099;
+		u[] = ;
+		I[] = ;
+		Cadjcost[] = ;
+		Y[] = ;
+	};
+
+	controls
+	{
+		C[], N[], K[], IIP[];
+	};
+
+	objective
+	{
+		U[] =;
+	};
+
+	constraints
+	{
+		;
+	};
+	
+	identities
+	{
+		TB[] = Y[] - C[] - I[] - Costadjcons[];
+		KtoN[] = ;
+		TBtoY[] = TB[] / Y[];
+		CA[] = ;
+		r[] = ;
+		r_given[] = r[];
+	};
+	
+	calibration
+	{
+		beta = 0.99;
 		delta = 0.025;
         gamma = 2;
         omega = 1.455;
-        alpha = 0.30;
+        psi2 = ;
+        psi = ;
+        alpha = 030;
         rstar = 0.01;
 		IIPbar = 0;
-                Sigma_L =;
-                Sigma_C=;
+                sigma_C ~ N(mu=1.5, sd=0.1, lower=1.0) = 1.5;
+                sigma_L ~ N(loc=2.0, scale=0.1, lower=1.0) = 2.0;
 	};
 };
 
