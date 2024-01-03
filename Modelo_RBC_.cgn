@@ -13,7 +13,7 @@ block STEADY_STATE
 		IIP[ss] = IIPbar;
         r[ss] = rstar;
 		r_given[ss] = r[ss];
-        w[ss] = ( );
+        wtot[ss] = (WP[ss])^omega * (WI[ss])^(1-omega));
         KtoN[ss] = (alpha/(r[ss]+delta))^(1/(1-alpha));
         N[ss] = ((1-alpha)*(KtoN[ss])^alpha)^(1/(omega-1));
         K[ss] = KtoN[ss]*N[ss];
@@ -75,6 +75,7 @@ block HOUSEHOLD
         psi2 = 0.0004;
         psi = 0.02;
         alpha = 0.30;
+        WP    = 0.005
         rstar = 0.010101;
 		IIPbar = 0;
 	};
