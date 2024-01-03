@@ -10,11 +10,9 @@ block STEADY_STATE
     identities
     {
         A[ss] = 1;
-        P[ss] = 1;
 		IIP[ss] = IIPbar;
         r[ss] = rstar;
 		r_given[ss] = r[ss];
-        w[ss] = (1 - alpha) * P[ss] ^ (1 / (1 - alpha)) * (alpha / r[ss]) ^ (alpha / (1 - alpha));
         KtoN[ss] = (alpha/(r[ss]+delta))^(1/(1-alpha));
         N[ss] = ((1-alpha)*(KtoN[ss])^alpha)^(1/(omega-1));
         K[ss] = KtoN[ss]*N[ss];
